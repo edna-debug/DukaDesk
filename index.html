@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DukaDesk | Shop Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <h2 class="brand"><span>D</span> DukaDesk</h2>
+      <p class="muted">SHOP MANAGEMENT</p>
+      <nav>
+        <button class="nav active" data-page="dashboard">▦ Dashboard</button>
+        <button class="nav" data-page="products">▤ Products</button>
+        <button class="nav" data-page="sales">＋ Record Sale</button>
+        <button class="nav" data-page="reports">▥ Reports</button>
+      </nav>
+      <div class="profile"><span>DM</span><div><b>Shop Admin</b><small>Demo workspace</small></div></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <button id="menuToggle" class="menu-toggle">☰</button>
+        <div><small id="eyebrow">OVERVIEW</small><h1 id="pageTitle">Dashboard</h1></div>
+        <button class="primary" data-go="sales">＋ New sale</button>
+      </header>
+
+      <section class="page active" id="dashboard">
+        <div class="welcome">
+          <small>YOUR BUSINESS AT A GLANCE</small>
+          <h2>Good business starts with clarity.</h2>
+          <p>Here's how your shop is doing today.</p>
+        </div>
+
+        <div class="stats">
+          <article class="stat"><p>Today's sales</p><h2 id="todaySales">KSh 0</h2><small id="todayCount">0 transactions</small></article>
+          <article class="stat"><p>Products listed</p><h2 id="productCount">0</h2><small>Products in catalogue</small></article>
+          <article class="stat"><p>Stock units</p><h2 id="stockCount">0</h2><small>Total units available</small></article>
+          <article class="stat"><p>Low stock</p><h2 id="lowCount">0</h2><small>Items need attention</small></article>
+        </div>
+
+        <div class="columns">
+          <section class="panel">
+            <div class="panel-heading"><div><h3>Recent sales</h3><p>Your latest transactions</p></div><button class="text-button" data-go="reports">View all →</button></div>
+            <div class="table-wrap"><table><thead><tr><th>Receipt</th><th>Items</th><th>Total</th></tr></thead><tbody id="recentSales"></tbody></table></div>
+            <p id="noRecent" class="empty">No sales recorded yet.</p>
+          </section>
+          <section class="panel">
+            <div class="panel-heading"><div><h3>Stock alerts</h3><p>Products running low</p></div></div>
+            <div id="lowStockList"></div>
+            <button class="secondary full" data-go="products">Manage products</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="products">
+        <div class="page-heading"><div><h2>Product inventory</h2><p>Manage your products and stock.</p></div><button class="primary" id="addProduct">＋ Add product</button></div>
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="Search products by name or SKU...">
+          <select id="stockFilter"><option value="all">All stock</option><option value="low">Low stock</option><option value="out">Out of stock</option></select>
+        </div>
+        <section class="panel">
+          <div class="table-wrap"><table><thead><tr><th>Product</th><th>SKU</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead><tbody id="productRows"></tbody></table></div>
+          <p id="noProducts" class="empty">No products found.</p>
+        </section>
+      </section>
+
+      <section class="page" id="sales">
+        <div class="page-heading"><div><h2>Record a sale</h2><p>Add items and confirm the transaction.</p></div></div>
+        <div class="columns sale-layout">
+          <section class="panel">
+            <h3>Add items</h3>
+            <label for="saleProduct">Product</label>
+            <select id="saleProduct"></select>
+            <div class="form-row">
+              <div><label for="saleQty">Quantity</label><input id="saleQty" type="number" min="1" value="1"></div>
+              <div class="button-align"><button class="primary full" id="addToSale">Add item</button></div>
+            </div>
+            <hr>
+            <h3>Items in this sale</h3>
+            <div id="cartItems"><p class="empty">Your sale is empty.</p></div>
+          </section>
+          <section class="panel">
+            <h3>Sale summary</h3>
+            <label for="payment">Payment method</label>
+            <select id="payment"><option>Cash</option><option>M-Pesa</option><option>Card</option><option>Other</option></select>
+            <div class="summary-row"><span>Items</span><b id="cartCount">0</b></div>
+            <div class="summary-row"><span>Subtotal</span><b id="subtotal">KSh 0</b></div>
+            <div class="total-row"><span>Total due</span><strong id="total">KSh 0</strong></div>
+            <button class="primary full" id="completeSale">Complete sale →</button>
+            <p class="hint">Demo version: data is stored in this browser only.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="reports">
+        <div class="page-heading"><div><h2>Sales reports</h2><p>Review your shop's recorded sales.</p></div><button class="secondary" id="exportCsv">Export CSV ↓</button></div>
+        <div class="stats report-stats">
+          <article class="stat"><p>Total revenue</p><h2 id="revenue">KSh 0</h2></article>
+          <article class="stat"><p>Transactions</p><h2 id="transactionCount">0</h2></article>
+          <article class="stat"><p>Average sale</p><h2 id="averageSale">KSh 0</h2></article>
+        </div>
+        <section class="panel">
+          <h3>All transactions</h3>
+          <div class="table-wrap"><table><thead><tr><th>Receipt</th><th>Date</th><th>Items</th><th>Payment</th><th>Total</th></tr></thead><tbody id="reportRows"></tbody></table></div>
+          <p id="noReports" class="empty">No transactions recorded yet.</p>
+        </section>
+      </section>
+
+      <footer>DukaDesk · Shop Inventory &amp; Sales Management</footer>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="productModal">
+    <form class="modal-card" id="productForm">
+      <div class="panel-heading"><h2 id="modalTitle">Add product</h2><button type="button" id="closeModal" class="close">×</button></div>
+      <input type="hidden" id="editId">
+      <label for="name">Product name</label><input id="name" required maxlength="80" placeholder="e.g. Maize flour 2kg">
+      <label for="sku">SKU / Product code</label><input id="sku" required maxlength="30" placeholder="e.g. MF-002">
+      <div class="form-row">
+        <div><label for="price">Selling price (KSh)</label><input id="price" required type="number" min="0.01" step="0.01"></div>
+        <div><label for="quantity">Quantity in stock</label><input id="quantity" required type="number" min="0" step="1"></div>
+      </div>
+      <label for="threshold">Low-stock alert threshold</label><input id="threshold" type="number" min="0" step="1" value="5" required>
+      <p id="formError" class="error"></p>
+      <div class="modal-actions"><button type="button" class="secondary" id="cancelModal">Cancel</button><button class="primary" type="submit">Save product</button></div>
+    </form>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
